@@ -1,7 +1,6 @@
 <?php
 namespace Fpp;
 
-require_once 'ContentTypes.php';
 /**
  * A http request class
  */
@@ -158,8 +157,9 @@ class Request
      * @param  array $params
      * @return string
      */
-    private function buildUrl(){
-        if(!empty($this->params)){
+    private function buildUrl()
+    {
+        if (!empty($this->params)) {
             $str = http_build_query($this->params);
             $url = $this->url;
             $this->url = $url . (strpos($url, '?') === false ? '?' : '&') . $str;
@@ -171,7 +171,8 @@ class Request
      *
      * @param string $type the Content-Type, such as application/json
      */
-    private function buildBody() {
+    private function buildBody()
+    {
         $body = '';
         if (is_array($this->data)) {
             switch ($this->ctype) {
@@ -185,7 +186,7 @@ class Request
                     $body = (string)$this->data;
                     break;
             }
-        }else {
+        } else {
             $body = (string)$this->data;
         }
 
@@ -195,14 +196,15 @@ class Request
     /**
      * process the rquest headers, capitalize key words, add user-agent
      */
-    private function buildHeader() {
+    private function buildHeader()
+    {
         $headers = array();
         foreach ($this->headers as $key => $value) {
             $key = ucwords($key);
             $headers[$key] = $value;
         }
         $headers['User-Agent'] = $this->useragent;
-        if (!empty($this->ctype)){
+        if (!empty($this->ctype)) {
             $headers['Content-Type'] = $this->ctype;
         }
         $this->headers = $headers;
@@ -211,12 +213,10 @@ class Request
     /**
      * prepare request before send
      */
-    public function prepare() {
+    public function prepare()
+    {
         $this->buildUrl();
         $this->buildHeader();
         $this->buildBody();
     }
-
 }
-
-?>

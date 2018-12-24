@@ -1,8 +1,6 @@
 <?php
 namespace Fpp;
 
-require_once 'MimeTypes.php';
-
 /**
  * The multipart constructure class.
  */
@@ -77,7 +75,8 @@ class MultiPartForm
      * Add multi forms one time
      * @param array $forms
      */
-    public function addForms($forms) {
+    public function addForms($forms)
+    {
         foreach ($forms as $key => $value) {
             array_push($this->forms, [$key, $value]);
         }
@@ -89,9 +88,9 @@ class MultiPartForm
      * @param string $content the file content
      * @param string $mimetype the file type, for example image/jpeg, etc
      */
-    public function addFile($field, $name, $content, $mimetype=NULL)
+    public function addFile($field, $name, $content, $mimetype=null)
     {
-        if(empty($mimetype)) {
+        if (empty($mimetype)) {
             $mimetype = MimeTypes::getMimetype($name);
         }
         array_push($this->files, [$field, $name, $mimetype, $content]);
@@ -118,11 +117,12 @@ class MultiPartForm
 
         // Flatten the list and add closing boundary marker,
         // then return CR+LF separated data
-        $parts = array_map(function($val) {return join($val, "\r\n");}, $parts);
+        $parts = array_map(function ($val) {
+            return join($val, "\r\n");
+        }, $parts);
         $end_boundary = $part_boundary . "--";
         array_push($parts, $end_boundary);
 
         return join($parts, "\r\n");
     }
 }
-?>

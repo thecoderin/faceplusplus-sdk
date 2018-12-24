@@ -15,5 +15,4 @@ class ContentType
      * Content-Type: application/x-www-form-urlencoded
      */
     const FORM = 'application/x-www-form-urlencoded';
-
 }

@@ -2,37 +2,44 @@
 namespace Fpp;
 
 // calculate the red channel color value
-function R($color) {
+function R($color)
+{
     return $color >> 16 & 0xFF;
 }
 
 // calculate the green channel color value
-function G($color) {
+function G($color)
+{
     return $color >> 8 & 0xFF;
 }
 
 // calculate the blue channel color value
-function B($color) {
+function B($color)
+{
     return $color & 0xFF;
 }
 
 // calculate the red channel color value
-function Ra($color) {
+function Ra($color)
+{
     return $color >> 24 & 0xFF;
 }
 
 // calculate the green channel color value
-function Ga($color) {
+function Ga($color)
+{
     return $color >> 16 & 0xFF;
 }
 
 // calculate the blue channel color value
-function Ba($color) {
+function Ba($color)
+{
     return $color >> 8 & 0xFF;
 }
 
 // calculate the alpha channel color value
-function Aa($color) {
+function Aa($color)
+{
     return $color & 0xFF;
 }
 
@@ -67,7 +74,7 @@ class Image
         if ($bgAspectRatio > $inputAspectRatio) {
             $targetWidth = round($bgHeight * $inputAspectRatio);
             $targetHeight = $bgHeight;
-        }else{
+        } else {
             $targetWidth = $bgWidth;
             $targetHeight = round($bgWidth / $inputAspectRatio);
         }
@@ -209,12 +216,11 @@ class Image
         if ($bgAspectRatio > $inputAspectRatio) {
             $targetWidth = round($bgHeight * $inputAspectRatio);
             $targetHeight = $bgHeight;
-        }else{
+        } else {
             $targetWidth = $bgWidth;
             $targetHeight = round($bgWidth / $inputAspectRatio);
         }
 
         return array($targetWidth, $targetHeight);
     }
-
 }

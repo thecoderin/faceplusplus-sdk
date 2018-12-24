@@ -2,10 +2,6 @@
 
 namespace Fpp;
 
-require_once 'lib/MimeTypes.php';
-require_once 'lib/MultiPartForm.php';
-require_once 'lib/Adapter.php';
-
 /**
  * Class FppClient
  *
@@ -14,7 +10,7 @@ require_once 'lib/Adapter.php';
  * @package Fpp
  */
 
-class FppClient
+class Client
 {
     // the server uri
     // in china is api-cn.faceplusplus.com, and in others is api-us.faceplusplus.com
@@ -113,7 +109,8 @@ class FppClient
     /**
      * add one or more face to exists faceset
      */
-    public function addFaceset($options) {
+    public function addFaceset($options)
+    {
         $path = '/facepp/v3/faceset/addface';
         return $this->request($path, $options);
     }
@@ -121,7 +118,8 @@ class FppClient
     /**
      * remove one or more face of the faceset
      */
-    public function removeFaceset($options) {
+    public function removeFaceset($options)
+    {
         $path = '/facepp/v3/faceset/removeface';
         return $this->request($path, $options);
     }
@@ -129,7 +127,8 @@ class FppClient
     /**
      * update faceset information
      */
-    public function updateFaceset($options) {
+    public function updateFaceset($options)
+    {
         $path = '/facepp/v3/faceset/update';
         return $this->request($path, $options);
     }
@@ -137,7 +136,8 @@ class FppClient
     /**
      * get faceset information
      */
-    public function getDetailFaceset($options) {
+    public function getDetailFaceset($options)
+    {
         $path = '/facepp/v3/faceset/getdetail';
         return $this->request($path, $options);
     }
@@ -145,7 +145,8 @@ class FppClient
     /**
      * delete faceset
      */
-    public function deleteFaceset($options) {
+    public function deleteFaceset($options)
+    {
         $path = '/facepp/v3/faceset/delete';
         return $this->request($path, $options);
     }
@@ -153,7 +154,8 @@ class FppClient
     /**
      * get faceset list
      */
-    public function getFacesets($options) {
+    public function getFacesets($options)
+    {
         $path = '/facepp/v3/faceset/getfacesets';
         return $this->request($path, $options);
     }
@@ -161,7 +163,8 @@ class FppClient
     /**
      * analyze face_token face
      */
-    public function analyzeFace($options) {
+    public function analyzeFace($options)
+    {
         $path = '/facepp/v3/face/analyze';
         return $this->request($path, $options);
     }
@@ -169,7 +172,8 @@ class FppClient
     /**
      * get face token detail
      */
-    public function getDetailFace($options) {
+    public function getDetailFace($options)
+    {
         $path = '/facepp/v3/face/getdetail';
         return $this->request($path, $options);
     }
@@ -177,7 +181,8 @@ class FppClient
     /**
      * set user id of the face token
      */
-    public function setUserIdFace($options) {
+    public function setUserIdFace($options)
+    {
         $path = '/facepp/v3/face/setuserid';
         return $this->request($path, $options);
     }
@@ -185,7 +190,8 @@ class FppClient
     /**
      * beauty user face
      */
-    public function beautyFace($options) {
+    public function beautyFace($options)
+    {
         $path = '/facepp/beta/beautify';
         return $this->request($path, $options);
     }
@@ -193,7 +199,8 @@ class FppClient
     /**
      * human body detect and analyze
      */
-    public function detectHumanBody($options) {
+    public function detectHumanBody($options)
+    {
         $path = '/humanbodypp/v1/detect';
         return $this->request($path, $options);
     }
@@ -291,7 +298,8 @@ class FppClient
     /**
      * Singleton of adapter
      */
-    public function getAdapter() {
+    public function getAdapter()
+    {
         $adapter = $this->adapter;
         if (!isset($adapter)) {
             $adapter = new $this->adapterClass($this->headers, $this->connectTimeout, $this->socketTimeout);
@@ -306,7 +314,8 @@ class FppClient
      * set adapter, if you need more control of the adapter, you can
      * construct a adapter, and then set it
      */
-    public function setAdapter($adapter) {
+    public function setAdapter($adapter)
+    {
         $this->adapter = $adapter;
     }
 
@@ -332,7 +341,7 @@ class FppClient
         foreach ($options as $key => $value) {
             if (is_file($value)) {
                 $forms->addFile($key, $value, file_get_contents($value));
-            }else {
+            } else {
                 $forms->addForm($key, $value);
             }
         }
@@ -349,7 +358,8 @@ class FppClient
      * @param string $path the request uri, starts with '/''
      * @return string the request url
      */
-    public function generateUrl($path) {
+    public function generateUrl($path)
+    {
         return $this->host . '/' . trim($path, '/');
     }
 
@@ -377,14 +387,16 @@ class FppClient
      * Set the public http's headers
      * @param array $headers
      */
-    public function setHeaders($headers) {
+    public function setHeaders($headers)
+    {
         $this->headers = $headers;
     }
 
     /**
      * set sslVerification
      */
-    public function setSslVerification($ssl) {
+    public function setSslVerification($ssl)
+    {
         $this->sslVerification = $ssl;
     }
 
@@ -396,5 +408,3 @@ class FppClient
         $this->curlOpts = $conf;
     }
 }
-
-?>

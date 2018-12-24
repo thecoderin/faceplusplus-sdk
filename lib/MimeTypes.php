@@ -261,4 +261,3 @@ class MimeTypes
         'xul' => 'application/vnd.mozilla.xul+xml',
     );
 }
-?>
