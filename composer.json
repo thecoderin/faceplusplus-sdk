@@ -1,7 +1,7 @@
 {
-    "name": "faceplusplus/facepp-php-sdk",
+    "name": "thecoderin/faceplusplus-sdk",
     "type": "library",
-    "description": "Open FPP API SDK for php developers",
+    "description": "Face++ API for Face recognition",
     "keywords": [],
     "homepage": "https://faceplusplus.com",
     "require": {
